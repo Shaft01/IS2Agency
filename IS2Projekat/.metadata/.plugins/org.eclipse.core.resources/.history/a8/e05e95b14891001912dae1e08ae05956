@@ -1,0 +1,21 @@
+package agencija.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+@RequestMapping(value="Hotel")
+public class HotelController {
+	
+	@Autowired
+	DestinacijaRepository dr;
+	
+	@RequestMapping(value="getDestinacije",method=RequestMethod.GET)
+	public String getDestinacije(String naziv,Model m) {
+		Destinacija d=dr.findByNaziv(naziv);
+	}
+
+}

@@ -1,0 +1,37 @@
+package com.example.demo.security;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.repository.KorisnikRepository;
+
+import model.DarkoArnautKorisnik;
+import model.DarkoArnautUloga;
+
+@Service("customUserDetailsService")
+class CustomUserDetailsService implements UserDetailsService{
+	
+	@Autowired
+	KorisnikRepository kr;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		DarkoArnautKorisnik k= kr.findByUsername(username);
+		UserDetailsImpl user=new UserDetailsImpl();
+		user.setUsername(k.getUsername());
+		user.setPassword(k.getPassword());
+		ArrayList<DarkoArnautUloga> ulog=new ArrayList<>();
+		ulog.add(k.getDarkoArnautUloga());
+		user.setUloge(ulog);
+		return user;
+	}
+	
+	
+
+}

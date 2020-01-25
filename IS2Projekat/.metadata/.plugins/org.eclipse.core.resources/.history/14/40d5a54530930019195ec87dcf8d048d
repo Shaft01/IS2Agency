@@ -1,0 +1,107 @@
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the DarkoArnautAerodrom database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="DarkoArnautAerodrom.findAll", query="SELECT d FROM DarkoArnautAerodrom d")
+public class DarkoArnautAerodrom implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idAerodroma;
+
+	private String nazivAerodroma;
+
+	//bi-directional many-to-one association to DarkoArnautGrad
+	@ManyToOne
+	@JoinColumn(name="idGrada")
+	private DarkoArnautGrad darkoArnautGrad;
+
+	//bi-directional many-to-one association to DarkoArnautLet
+	@OneToMany(mappedBy="darkoArnautAerodrom1")
+	private List<DarkoArnautLet> darkoArnautLets1;
+
+	//bi-directional many-to-one association to DarkoArnautLet
+	@OneToMany(mappedBy="darkoArnautAerodrom2")
+	private List<DarkoArnautLet> darkoArnautLets2;
+
+	public DarkoArnautAerodrom() {
+	}
+
+	public int getIdAerodroma() {
+		return this.idAerodroma;
+	}
+
+	public void setIdAerodroma(int idAerodroma) {
+		this.idAerodroma = idAerodroma;
+	}
+
+	public String getNazivAerodroma() {
+		return this.nazivAerodroma;
+	}
+
+	public void setNazivAerodroma(String nazivAerodroma) {
+		this.nazivAerodroma = nazivAerodroma;
+	}
+
+	public DarkoArnautGrad getDarkoArnautGrad() {
+		return this.darkoArnautGrad;
+	}
+
+	public void setDarkoArnautGrad(DarkoArnautGrad darkoArnautGrad) {
+		this.darkoArnautGrad = darkoArnautGrad;
+	}
+
+	public List<DarkoArnautLet> getDarkoArnautLets1() {
+		return this.darkoArnautLets1;
+	}
+
+	public void setDarkoArnautLets1(List<DarkoArnautLet> darkoArnautLets1) {
+		this.darkoArnautLets1 = darkoArnautLets1;
+	}
+
+	public DarkoArnautLet addDarkoArnautLets1(DarkoArnautLet darkoArnautLets1) {
+		getDarkoArnautLets1().add(darkoArnautLets1);
+		darkoArnautLets1.setDarkoArnautAerodrom1(this);
+
+		return darkoArnautLets1;
+	}
+
+	public DarkoArnautLet removeDarkoArnautLets1(DarkoArnautLet darkoArnautLets1) {
+		getDarkoArnautLets1().remove(darkoArnautLets1);
+		darkoArnautLets1.setDarkoArnautAerodrom1(null);
+
+		return darkoArnautLets1;
+	}
+
+	public List<DarkoArnautLet> getDarkoArnautLets2() {
+		return this.darkoArnautLets2;
+	}
+
+	public void setDarkoArnautLets2(List<DarkoArnautLet> darkoArnautLets2) {
+		this.darkoArnautLets2 = darkoArnautLets2;
+	}
+
+	public DarkoArnautLet addDarkoArnautLets2(DarkoArnautLet darkoArnautLets2) {
+		getDarkoArnautLets2().add(darkoArnautLets2);
+		darkoArnautLets2.setDarkoArnautAerodrom2(this);
+
+		return darkoArnautLets2;
+	}
+
+	public DarkoArnautLet removeDarkoArnautLets2(DarkoArnautLet darkoArnautLets2) {
+		getDarkoArnautLets2().remove(darkoArnautLets2);
+		darkoArnautLets2.setDarkoArnautAerodrom2(null);
+
+		return darkoArnautLets2;
+	}
+
+}

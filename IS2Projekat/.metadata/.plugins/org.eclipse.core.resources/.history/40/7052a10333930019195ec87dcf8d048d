@@ -1,0 +1,9 @@
+package com.example.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import model.DarkoArnautKorisnik;
+
+public interface KorisnikRepository extends JpaRepository<DarkoArnautKorisnik,Integer>{
+	public DarkoArnautKorisnik findByUsername(String username);
+}

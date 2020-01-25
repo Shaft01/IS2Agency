@@ -1,0 +1,9 @@
+package agencija.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import model.Soba;
+
+public interface SobaRepository extends JpaRepository<Soba, Integer> {
+	List<Soba> findByHotel(Hotel h);
+}

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="KarteKorisnika" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5484f8ea-1853-4f8c-90a3-4f9f03c11e7e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="korisnik" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="idKarte" class="java.lang.Integer"/>
+	<field name="mesto" class="java.lang.Integer"/>
+	<field name="cena" class="java.lang.Integer"/>
+	<field name="darkoArnautLet.darkoArnautAerodrom1.nazivAerodroma" class="java.lang.String"/>
+	<field name="Field_1" class="java.lang.String"/>
+	<field name="darkoArnautLet.darkoArnautAerodrom2.nazivAerodroma" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="40" width="141" height="21" uuid="441bdbd9-98f4-4eda-8f21-d58742528b90"/>
+				<text><![CDATA[Korisnik:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="40" width="90" height="21" uuid="ab5c5d2d-343e-4bf3-b97a-455a6b794f74"/>
+				<textFieldExpression><![CDATA[$P{korisnik}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="30" width="100" height="30" uuid="11d6908b-5c9a-49e2-b2ba-8949868ebfa0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fbdaa511-a43c-4f6c-803c-86e5d215ccb5"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[idKarte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="30" width="100" height="30" uuid="b5671fe2-df1c-4016-bd20-592eef7f87e1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fd1fedb5-7fe3-469d-bd2e-c2e192883c9e"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[mesto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="30" width="100" height="30" uuid="bd712ce0-4f40-44e6-bbf1-2b1150ac74ad">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ee07a11-c71c-44b6-bb5c-069f6aac6168"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[cena]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="30" width="100" height="30" uuid="6a8e7813-9e93-4403-9383-6e09b7beca5c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="48424706-a28e-480b-b13f-330cd465ed03"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[darkoArnautLet.darkoArnautAerodrom1.nazivAerodroma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="30" width="100" height="30" uuid="8b49fa01-c1bc-4d78-a82a-62c70d91284c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dbd07011-3b05-4289-8102-b05fff98a626"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[darkoArnautLet.darkoArnautAerodrom2.nazivAerodroma]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="49" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="100" height="30" uuid="0dc24248-b9b2-4098-a9b0-68f95c9f7fd7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fbdaa511-a43c-4f6c-803c-86e5d215ccb5"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{idKarte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="100" height="30" uuid="dae6c85b-43df-4874-87f6-15d155556691">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fd1fedb5-7fe3-469d-bd2e-c2e192883c9e"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{mesto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="-1" width="100" height="30" uuid="b8cd0059-79a9-4bbe-a76b-74be09b53f27">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ee07a11-c71c-44b6-bb5c-069f6aac6168"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{cena}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="-1" width="100" height="30" uuid="14be6da7-6bfa-4bff-979e-349b3c3faa1b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="48424706-a28e-480b-b13f-330cd465ed03"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{darkoArnautLet.darkoArnautAerodrom1.nazivAerodroma}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="-1" width="100" height="30" uuid="4cb8bd54-2984-43ca-807d-c44f1221496d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dbd07011-3b05-4289-8102-b05fff98a626"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{darkoArnautLet.darkoArnautAerodrom2.nazivAerodroma}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

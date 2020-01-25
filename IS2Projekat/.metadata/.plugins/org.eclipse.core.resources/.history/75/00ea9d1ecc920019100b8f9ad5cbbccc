@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Pocetna</title>
+<style>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/styles.css">
+</style>
+</head>
+<body>
+	<sec:authorize access="hasRole('ADMIN')">
+     <a href="/Agencija/unosDestinacije.jsp"><button>Unos destinacije</button></a>
+     <a href="/Agencija/Unos/getDestinacije"><button>Unos hotela</button></a>
+     <a href="/Agencija/prikazHotela.jsp"><button>Svi aranzmani hotela</button></a>
+     <a href="/Agencija/Unos/getDestinacije"><button>Unos sobe</button></a>
+	</sec:authorize>
+
+ <sec:authorize access="hasRole('KORISNIK')or hasRole('ADMIN')">
+   <a href="/Agencija/Agencija/getDestinacije"><button>Rezervisi aranzman</button></a>
+   <a href="/Agencija/Aranzman/getAranzmaniKorisnika"><button>Pregledaj aranzmane</button></a>
+   <a href="/Agencija/auth/logout"><button>Odjava</button></a>
+ </sec:authorize>
+
+	
+</body>
+</html>

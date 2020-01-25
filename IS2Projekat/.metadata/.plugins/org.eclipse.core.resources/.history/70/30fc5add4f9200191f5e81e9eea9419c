@@ -1,0 +1,95 @@
+package agencija.controller;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import agencija.repository.AranzmanRepository;
+import agencija.repository.DestinacijaRepository;
+import agencija.repository.HotelRepository;
+import agencija.repository.KorisnikRepository;
+import agencija.repository.SobaRepository;
+import model.Aranzman;
+import model.Destinacija;
+import model.Hotel;
+import model.Korisnik;
+import model.Soba;
+
+@Controller
+@RequestMapping(value="/Agencija")
+public class AgencijaController {
+
+	@Autowired
+	DestinacijaRepository dr;
+	
+	@Autowired
+	HotelRepository hr;
+	@Autowired
+	SobaRepository sr;
+	@Autowired
+	AranzmanRepository ar;
+	
+	@Autowired
+	KorisnikRepository kr;
+	
+	@RequestMapping(value="getDestinacije", method= RequestMethod.GET)
+	public String getDestinacije(HttpServletRequest request) {
+		List<Destinacija> destinacije= dr.findAll();
+		request.getSession().setAttribute("destinacije",destinacije);
+		return "/odabirDestinacije";
+	}
+	@RequestMapping(value="getHoteli",method=RequestMethod.GET)
+	public String getHoteli(HttpServletRequest request,int idDestinacija,Model m) {
+		Destinacija d= dr.findById(idDestinacija).get();
+		List<Hotel> hoteli=hr.findByDestinacija(d);
+		request.getSession().setAttribute("hoteli", hoteli);
+		request.getSession().setAttribute("dest", d);
+		
+		return "/odabirDestinacije";
+	}
+	@RequestMapping(value="getSobe", method=RequestMethod.GET)
+	public String getSobe(int idHotel,HttpServletRequest request,Model m) {
+		Hotel h=hr.findById(idHotel).get();
+		List<Soba> sobe=sr.findByHotel(h);
+		request.getSession().setAttribute("hotel", h);
+		m.addAttribute("sobe", sobe);
+		return "/unosAranzmana";
+		
+	}
+	
+
+
+	@RequestMapping(value="saveAranzman", method=RequestMethod.POST)
+	public String saveAranzman(HttpServletRequest request,int idSobe,int brDana,String datumRezervisanja,String datumPlacanja) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Korisnik k = kr.findById(userDetails.getUsername()).get();
+		Soba s=sr.findById(idSobe).get();
+		Hotel h=s.getHotel();
+		Destinacija d=h.getDestinacija();
+		Aranzman aranzman=new Aranzman();
+		aranzman.setBrojDana(brDana);
+		aranzman.setDatumPlacanja(datumPlacanja);
+		aranzman.setDatumRezervacije(datumRezervisanja);
+		double cena=s.getCena()*brDana;
+		aranzman.setCena(cena);
+		aranzman.setDestinacija((Destinacija)request.getSession().getAttribute("dest"));
+		aranzman.setHotel(h);
+		aranzman.setSoba(s);
+		aranzman.setKorisnik(k);
+		ar.save(aranzman);
+		return "unosAranzmana";
+	}
+}

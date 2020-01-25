@@ -1,0 +1,45 @@
+package com.example.demo.controllor;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.demo.repository.DarkoArnautGradRepository;
+import com.example.demo.repository.UlogaRepository;
+
+import model.DarkoArnautAerodrom;
+import model.DarkoArnautGrad;
+import model.DarkoArnautUloga;
+
+@Controller
+@RequestMapping(value="/gradovi")
+public class GradoviControllor {
+	
+	@Autowired
+	DarkoArnautGradRepository gr;
+	
+	@Autowired 
+	UlogaRepository ur;
+	@RequestMapping(value="/getGradovi", method=RequestMethod.GET)
+	public String getGradovi(HttpServletRequest request) {
+		List<DarkoArnautGrad> gradovi=gr.findAll();
+		List<DarkoArnautUloga> uloge=ur.findAll();
+		request.getSession().setAttribute("uloge", uloge);
+		request.getSession().setAttribute("gradovi", gradovi);
+		return "/izborGrada";
+	}
+	@RequestMapping(value="/izaberiGrad", method=RequestMethod.POST)
+	public String izaberiGrad(Integer idG,HttpServletRequest request) {
+		DarkoArnautGrad grad=gr.findById(idG).get();
+		List<DarkoArnautAerodrom> aerodroms=grad.getDarkoArnautAerodroms();
+		request.getSession().setAttribute("aerodromi", aerodroms);
+		return "/sviAerodromi";
+	}
+	
+}

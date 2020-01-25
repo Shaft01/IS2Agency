@@ -1,0 +1,68 @@
+package com.example.demo.controllor;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.demo.repository.KorisnikRepository;
+
+import model.DarkoArnautKarta;
+import model.DarkoArnautKorisnik;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
+@RequestMapping(value="korisnik")
+@Controller
+public class KorisnikControllor {
+	
+	@Autowired
+	KorisnikRepository kr;
+	
+	@RequestMapping(value="sviKorisnici", method=RequestMethod.GET)
+	public String getKorisnici(HttpServletRequest request) {
+		List<DarkoArnautKorisnik> list=kr.findAll();
+		List<DarkoArnautKorisnik>regularniK=new ArrayList<>();
+		for(DarkoArnautKorisnik k:list) {
+			if(k.getDarkoArnautUloga().getIdUloge()==2)
+				regularniK.add(k);
+		}
+		request.getSession().setAttribute("regK", regularniK);
+		return "izaberiKorisnika";
+	}
+	@RequestMapping(value="kreirajIzvestaj", method=RequestMethod.GET)
+	public void getIzvestaj(int korisnik, HttpServletResponse response) throws Exception {
+		DarkoArnautKorisnik k=kr.findById(korisnik).get();
+		List<DarkoArnautKarta> karte=k.getDarkoArnautKartas();
+		
+		response.setContentType("text/html");
+		JRBeanCollectionDataSource dataSource=new JRBeanCollectionDataSource(karte);
+		InputStream is=this.getClass().getResourceAsStream("/JasperReports/KarteKorisnika.jrxml");
+		JasperReport jasperReport = JasperCompileManager.compileReport(is);
+		Map<String, Object> params=new HashMap<>();
+		params.put("korisnik", k.getIme()+" "+k.getPrezime()+" ("+k.getUsername()+")");
+		JasperPrint jp=JasperFillManager.fillReport(jasperReport, params, dataSource);
+		is.close();
+		
+		response.setContentType("application/x-download");
+		response.addHeader("Content-disposition", "attachment; filename=karteKorisnika.pdf"); 
+		OutputStream out=response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jp, out);
+	}
+	
+}

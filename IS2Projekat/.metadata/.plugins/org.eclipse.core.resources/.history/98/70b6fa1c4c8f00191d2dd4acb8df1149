@@ -1,0 +1,79 @@
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the hotel database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Hotel.findAll", query="SELECT h FROM Hotel h")
+public class Hotel implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private int idHotel;
+
+	private String naziv;
+
+	//bi-directional many-to-one association to Destinacija
+	@OneToMany(mappedBy="hotel")
+	private List<Destinacija> destinacijas;
+
+	//bi-directional many-to-one association to Soba
+	@ManyToOne
+	private Soba soba;
+
+	public Hotel() {
+	}
+
+	public int getIdHotel() {
+		return this.idHotel;
+	}
+
+	public void setIdHotel(int idHotel) {
+		this.idHotel = idHotel;
+	}
+
+	public String getNaziv() {
+		return this.naziv;
+	}
+
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
+	}
+
+	public List<Destinacija> getDestinacijas() {
+		return this.destinacijas;
+	}
+
+	public void setDestinacijas(List<Destinacija> destinacijas) {
+		this.destinacijas = destinacijas;
+	}
+
+	public Destinacija addDestinacija(Destinacija destinacija) {
+		getDestinacijas().add(destinacija);
+		destinacija.setHotel(this);
+
+		return destinacija;
+	}
+
+	public Destinacija removeDestinacija(Destinacija destinacija) {
+		getDestinacijas().remove(destinacija);
+		destinacija.setHotel(null);
+
+		return destinacija;
+	}
+
+	public Soba getSoba() {
+		return this.soba;
+	}
+
+	public void setSoba(Soba soba) {
+		this.soba = soba;
+	}
+
+}

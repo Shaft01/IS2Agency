@@ -1,0 +1,76 @@
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the DarkoArnautKarta database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="DarkoArnautKarta.findAll", query="SELECT d FROM DarkoArnautKarta d")
+public class DarkoArnautKarta implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idKarte;
+
+	private int cena;
+
+	private int mesto;
+
+	//bi-directional many-to-one association to DarkoArnautKorisnik
+	@ManyToOne
+	@JoinColumn(name="idKorisnika")
+	private DarkoArnautKorisnik darkoArnautKorisnik;
+
+	//bi-directional many-to-one association to DarkoArnautLet
+	@ManyToOne
+	private DarkoArnautLet darkoArnautLet;
+
+	public DarkoArnautKarta() {
+	}
+
+	public int getIdKarte() {
+		return this.idKarte;
+	}
+
+	public void setIdKarte(int idKarte) {
+		this.idKarte = idKarte;
+	}
+
+	public int getCena() {
+		return this.cena;
+	}
+
+	public void setCena(int cena) {
+		this.cena = cena;
+	}
+
+	public int getMesto() {
+		return this.mesto;
+	}
+
+	public void setMesto(int mesto) {
+		this.mesto = mesto;
+	}
+
+	public DarkoArnautKorisnik getDarkoArnautKorisnik() {
+		return this.darkoArnautKorisnik;
+	}
+
+	public void setDarkoArnautKorisnik(DarkoArnautKorisnik darkoArnautKorisnik) {
+		this.darkoArnautKorisnik = darkoArnautKorisnik;
+	}
+
+	public DarkoArnautLet getDarkoArnautLet() {
+		return this.darkoArnautLet;
+	}
+
+	public void setDarkoArnautLet(DarkoArnautLet darkoArnautLet) {
+		this.darkoArnautLet = darkoArnautLet;
+	}
+
+}

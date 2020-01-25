@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>       
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Prikaz aranzmana korisnika</title>
+</head>
+<body>
+	<sec:authorize access="hasRole('ADMIN')">
+     <a href="/Agencija/unosDestinacije.jsp"><button>Unos destinacije</button></a>
+     <a href="/Agencija/Unos/getDestinacije"><button>Unos hotela</button></a>
+     <a href="/Agencija/prikazHotela.jsp"><button>Svi aranzmani hotela</button></a>
+     <a href="/Agencija/Unos/getDestinacije"><button>Unos sobe</button></a>
+	</sec:authorize>
+
+ <sec:authorize access="hasRole('KORISNIK')or hasRole('ADMIN')">
+   <a href="/Agencija/Agencija/getDestinacije"><button>Rezervisi aranzman</button></a>
+   <a href="/Agencija/Aranzman/getAranzmaniKorisnika"><button>Pregledaj aranzmane</button></a>
+   <a href="/Agencija/auth/logout"><button>Odjava</button></a>
+ </sec:authorize>
+	Prikaz aranzmana za korisnika ${korisnik.ime } ${korisnik.prezime }
+	
+	<table>
+		<tr><th>Destinacija</th><th>Hotel</th><th>Soba</th><th>Cena aranzmana</th></tr>
+		<c:forEach items="${aranzmani }" var="a">
+		<tr>
+			<td>${a.destinacija.naziv }</td>
+			<td>${a.hotel.naziv }</td>
+			<td>${a.soba.tip }</td>
+			<td>${a.cena}</td>
+		</tr>
+		</c:forEach>
+	</table>
+	<form action="/Agencija/Aranzman/izvestaj" method="get">
+	<input type="submit" value="Izvestaj">
+	</form>
+</body>
+</html>

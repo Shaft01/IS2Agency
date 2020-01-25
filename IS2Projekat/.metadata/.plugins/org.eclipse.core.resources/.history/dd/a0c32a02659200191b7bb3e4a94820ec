@@ -1,0 +1,6 @@
+package agencija.controller;
+@Controller
+@RequestMapping(value="/aranzman")
+public class AranzmanController {
+
+}

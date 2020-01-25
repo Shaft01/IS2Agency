@@ -1,0 +1,68 @@
+package com.example.demo.controllor;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.demo.repository.AerodromRepository;
+import com.example.demo.repository.LetRepository;
+
+import model.Darkoarnautaerodrom;
+import model.Darkoarnautlet;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
+@Controller
+@RequestMapping(value="/sviLetovi")
+public class LetControllor {
+	@Autowired
+	LetRepository lr;
+	
+	@Autowired
+	AerodromRepository ar;
+
+	@RequestMapping(value="/prikazLet1", method=RequestMethod.GET)
+	public String prikazLet1(String id,HttpServletRequest request) {
+		int idA=Integer.parseInt(id);
+		Darkoarnautaerodrom a=ar.findById(idA).get();
+		List<Darkoarnautlet> letovi= a.getDarkoarnautlets1();
+		request.getSession().setAttribute("letovi1", letovi);
+		request.getSession().setAttribute("aerodromI", a);
+		return "/prikazSletanja";
+	}
+	@RequestMapping(value="/izvestajPoletanja", method=RequestMethod.GET)
+	public void generisiIzvestajSletanja(int ai,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Darkoarnautaerodrom a=ar.findById(ai).get();
+		List<Darkoarnautlet> letovi=a.getDarkoarnautlets2();
+		
+		response.setContentType("text/html");
+		JRBeanCollectionDataSource dataSorce= new JRBeanCollectionDataSource(letovi);
+		InputStream inputStream=this.getClass().getResourceAsStream("/JasperReports/letoviSaAerodroma.jrxml");
+		JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+		
+		Map<String, Object> params=new HashMap<String, Object>();
+		String aerodr=a.getNazivAerodroma()+" ("+a.getDarkoarnautgrad().getSkracenoIme()+")";
+		params.put("imeAerodroma", aerodr);
+		JasperPrint jp=JasperFillManager.fillReport(jasperReport, params, dataSorce);
+		inputStream.close();
+		
+		response.setContentType("application/x-download");
+		response.addHeader("Content-disposition", "attachment; filename=izvestajPoletanja.pdf"); 
+		OutputStream out=response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jp, out);
+	}
+}

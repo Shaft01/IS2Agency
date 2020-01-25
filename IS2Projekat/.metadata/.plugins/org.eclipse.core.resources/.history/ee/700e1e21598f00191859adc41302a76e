@@ -1,0 +1,104 @@
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the soba database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Soba.findAll", query="SELECT s FROM Soba s")
+public class Soba implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idSoba;
+
+	private double cena;
+
+	private byte zauzet;
+
+	//bi-directional many-to-one association to Aranzman
+	@OneToMany(mappedBy="soba")
+	private List<Aranzman> aranzmans;
+
+	//bi-directional many-to-one association to Hotel
+	@OneToMany(mappedBy="soba")
+	private List<Hotel> hotels;
+
+	public Soba() {
+	}
+
+	public int getIdSoba() {
+		return this.idSoba;
+	}
+
+	public void setIdSoba(int idSoba) {
+		this.idSoba = idSoba;
+	}
+
+	public double getCena() {
+		return this.cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
+	}
+
+	public byte getZauzet() {
+		return this.zauzet;
+	}
+
+	public void setZauzet(byte zauzet) {
+		this.zauzet = zauzet;
+	}
+
+	public List<Aranzman> getAranzmans() {
+		return this.aranzmans;
+	}
+
+	public void setAranzmans(List<Aranzman> aranzmans) {
+		this.aranzmans = aranzmans;
+	}
+
+	public Aranzman addAranzman(Aranzman aranzman) {
+		getAranzmans().add(aranzman);
+		aranzman.setSoba(this);
+
+		return aranzman;
+	}
+
+	public Aranzman removeAranzman(Aranzman aranzman) {
+		getAranzmans().remove(aranzman);
+		aranzman.setSoba(null);
+
+		return aranzman;
+	}
+
+	public List<Hotel> getHotels() {
+		return this.hotels;
+	}
+
+	public void setHotels(List<Hotel> hotels) {
+		this.hotels = hotels;
+	}
+
+	public Hotel addHotel(Hotel hotel) {
+		getHotels().add(hotel);
+		hotel.setSoba(this);
+
+		return hotel;
+	}
+
+	public Hotel removeHotel(Hotel hotel) {
+		getHotels().remove(hotel);
+		hotel.setSoba(null);
+
+		return hotel;
+	}
+
+}

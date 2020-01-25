@@ -1,0 +1,68 @@
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the DarkoArnautUloga database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="DarkoArnautUloga.findAll", query="SELECT d FROM DarkoArnautUloga d")
+public class DarkoArnautUloga implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idUloge;
+
+	private String uloga;
+
+	//bi-directional many-to-one association to DarkoArnautKorisnik
+	@OneToMany(mappedBy="darkoArnautUloga")
+	private List<DarkoArnautKorisnik> darkoArnautKorisniks;
+
+	public DarkoArnautUloga() {
+	}
+
+	public int getIdUloge() {
+		return this.idUloge;
+	}
+
+	public void setIdUloge(int idUloge) {
+		this.idUloge = idUloge;
+	}
+
+	public String getUloga() {
+		return this.uloga;
+	}
+
+	public void setUloga(String uloga) {
+		this.uloga = uloga;
+	}
+
+	public List<DarkoArnautKorisnik> getDarkoArnautKorisniks() {
+		return this.darkoArnautKorisniks;
+	}
+
+	public void setDarkoArnautKorisniks(List<DarkoArnautKorisnik> darkoArnautKorisniks) {
+		this.darkoArnautKorisniks = darkoArnautKorisniks;
+	}
+
+	public DarkoArnautKorisnik addDarkoArnautKorisnik(DarkoArnautKorisnik darkoArnautKorisnik) {
+		getDarkoArnautKorisniks().add(darkoArnautKorisnik);
+		darkoArnautKorisnik.setDarkoArnautUloga(this);
+
+		return darkoArnautKorisnik;
+	}
+
+	public DarkoArnautKorisnik removeDarkoArnautKorisnik(DarkoArnautKorisnik darkoArnautKorisnik) {
+		getDarkoArnautKorisniks().remove(darkoArnautKorisnik);
+		darkoArnautKorisnik.setDarkoArnautUloga(null);
+
+		return darkoArnautKorisnik;
+	}
+
+}

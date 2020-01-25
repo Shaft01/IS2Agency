@@ -1,0 +1,35 @@
+package agencija.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import agencija.repository.AranzmanRepository;
+import agencija.repository.KorisnikRepository;
+import model.Aranzman;
+import model.Korisnik;
+
+@Controller
+@RequestMapping(value="/Aranzman")
+public class AranzmanController {
+	@Autowired
+	KorisnikRepository kr;
+	@Autowired
+	AranzmanRepository ar;
+	@RequestMapping(value="getAranzmaniKorisnika")
+	public String getAranzmani(HttpServletRequest request,Model m) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Korisnik k = kr.findById(userDetails.getUsername()).get();
+		List<Aranzman> aranzmani=ar.findByKorisnik(k);
+		request.getSession().setAttribute("aranzmani", aranzmani);
+		m.addAttribute("korisnik", k);
+		return "prikazAranzmanaKorisnika";
+	}
+}

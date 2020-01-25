@@ -1,0 +1,7 @@
+package agencija.controller;
+
+@Controller
+@RequestMapping(value="Hotel")
+public class HotelController {
+
+}

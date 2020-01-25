@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<Form action="/Agencija/Unos/unosDestinacije" method="post">
+		<table>
+			<tr>
+				<td>Naziv destinacije</td>
+				<td> <input type="text" name="naziv"></td>
+			</tr>
+			<tr>
+				<td>Ocena destinacije</td>
+				<td><input type="text" name="ocena"></td>
+			</tr>
+			<tr>
+			<td><input type="submit" value="Dodaj"></td>
+			</tr>
+		</table>
+	</Form>
+</body>
+</html>

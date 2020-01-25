@@ -1,0 +1,45 @@
+package com.example.demo.controllor;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.demo.repository.DarkoArnautGradRepository;
+import com.example.demo.repository.UlogaRepository;
+
+import model.Darkoarnautaerodrom;
+import model.Darkoarnautgrad;
+import model.Darkoarnaut;
+
+@Controller
+@RequestMapping(value="/gradovi")
+public class GradoviControllor {
+	
+	@Autowired
+	DarkoArnautGradRepository gr;
+	
+	@Autowired 
+	UlogaRepository ur;
+	@RequestMapping(value="/getGradovi", method=RequestMethod.GET)
+	public String getGradovi(HttpServletRequest request) {
+		List<Darkoarnautgrad> gradovi=gr.findAll();
+		List<Darkoarnaut> uloge=ur.findAll();
+		request.getSession().setAttribute("uloge", uloge);
+		request.getSession().setAttribute("gradovi", gradovi);
+		return "/izborGrada";
+	}
+	@RequestMapping(value="/izaberiGrad", method=RequestMethod.POST)
+	public String izaberiGrad(Integer idG,HttpServletRequest request) {
+		Darkoarnautgrad grad=gr.findById(idG).get();
+		List<Darkoarnautaerodrom> aerodroms=grad.getDarkoarnautaerodroms();
+		request.getSession().setAttribute("aerodromi", aerodroms);
+		return "/sviAerodromi";
+	}
+	
+}

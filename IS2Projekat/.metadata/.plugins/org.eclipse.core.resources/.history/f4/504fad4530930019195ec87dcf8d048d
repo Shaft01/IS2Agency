@@ -1,0 +1,94 @@
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the DarkoArnautLet database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="DarkoArnautLet.findAll", query="SELECT d FROM DarkoArnautLet d")
+public class DarkoArnautLet implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idLeta;
+
+	private String kompanija;
+
+	//bi-directional many-to-one association to DarkoArnautKarta
+	@OneToMany(mappedBy="darkoArnautLet")
+	private List<DarkoArnautKarta> darkoArnautKartas;
+
+	//bi-directional many-to-one association to DarkoArnautAerodrom
+	@ManyToOne
+	@JoinColumn(name="idAerodromaD")
+	private DarkoArnautAerodrom darkoArnautAerodrom1;
+
+	//bi-directional many-to-one association to DarkoArnautAerodrom
+	@ManyToOne
+	@JoinColumn(name="idAerodromaP")
+	private DarkoArnautAerodrom darkoArnautAerodrom2;
+
+	public DarkoArnautLet() {
+	}
+
+	public int getIdLeta() {
+		return this.idLeta;
+	}
+
+	public void setIdLeta(int idLeta) {
+		this.idLeta = idLeta;
+	}
+
+	public String getKompanija() {
+		return this.kompanija;
+	}
+
+	public void setKompanija(String kompanija) {
+		this.kompanija = kompanija;
+	}
+
+	public List<DarkoArnautKarta> getDarkoArnautKartas() {
+		return this.darkoArnautKartas;
+	}
+
+	public void setDarkoArnautKartas(List<DarkoArnautKarta> darkoArnautKartas) {
+		this.darkoArnautKartas = darkoArnautKartas;
+	}
+
+	public DarkoArnautKarta addDarkoArnautKarta(DarkoArnautKarta darkoArnautKarta) {
+		getDarkoArnautKartas().add(darkoArnautKarta);
+		darkoArnautKarta.setDarkoArnautLet(this);
+
+		return darkoArnautKarta;
+	}
+
+	public DarkoArnautKarta removeDarkoArnautKarta(DarkoArnautKarta darkoArnautKarta) {
+		getDarkoArnautKartas().remove(darkoArnautKarta);
+		darkoArnautKarta.setDarkoArnautLet(null);
+
+		return darkoArnautKarta;
+	}
+
+	public DarkoArnautAerodrom getDarkoArnautAerodrom1() {
+		return this.darkoArnautAerodrom1;
+	}
+
+	public void setDarkoArnautAerodrom1(DarkoArnautAerodrom darkoArnautAerodrom1) {
+		this.darkoArnautAerodrom1 = darkoArnautAerodrom1;
+	}
+
+	public DarkoArnautAerodrom getDarkoArnautAerodrom2() {
+		return this.darkoArnautAerodrom2;
+	}
+
+	public void setDarkoArnautAerodrom2(DarkoArnautAerodrom darkoArnautAerodrom2) {
+		this.darkoArnautAerodrom2 = darkoArnautAerodrom2;
+	}
+
+}

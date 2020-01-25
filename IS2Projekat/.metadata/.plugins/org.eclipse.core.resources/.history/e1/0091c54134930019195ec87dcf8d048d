@@ -1,0 +1,55 @@
+package com.example.demo.controllor;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.demo.repository.KorisnikRepository;
+import com.example.demo.repository.UlogaRepository;
+
+import model.Darkoarnaut;
+import model.Darkoarnautkarta;
+import model.Darkoarnautkorisnik;
+
+@Controller
+@RequestMapping(value="/security")
+public class LoginControllor {
+	
+	@Autowired
+	KorisnikRepository kr;
+	
+	@Autowired
+	UlogaRepository ur;
+	
+	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+    public String loginPage() {    
+    	return "login";
+     
+    }
+
+	@RequestMapping(value="/pocetna", method=RequestMethod.GET)
+	public String pocetna() {
+	return "index";	
+	}
+	
+	@RequestMapping(value="/registracija", method=RequestMethod.POST)
+	public String regitrujSe(String username, String password, String ime, String prezime) {
+		Darkoarnautkorisnik d=new Darkoarnautkorisnik();
+		d.setIme(ime);
+		d.setPrezime(prezime);
+		d.setPassword(new BCryptPasswordEncoder().encode(password));
+		d.setUsername(username);
+		d.setDarkoarnautkartas(new ArrayList<Darkoarnautkarta>());
+		Darkoarnaut u=ur.findById(2).get();
+		d.setDarkoarnaut(u);
+		u.addDarkoarnautkorisnik(d);
+		kr.save(d);
+		return "login";	
+	}
+	
+	
+}

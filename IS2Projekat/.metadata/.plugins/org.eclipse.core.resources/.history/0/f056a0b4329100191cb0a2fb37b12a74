@@ -1,0 +1,7 @@
+package agencija.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AranzmanRepository extends JpaRepository<Aranzman, Integer> {
+
+}

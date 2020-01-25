@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Prikaz aranzmana korisnika</title>
+</head>
+<body>
+	Prikaz aranzmana za korisnika ${korisnik.ime } ${korisnik.prezime }
+	
+	<table>
+		<tr><th>Destinacija</th><th>Hotel</th><th>Soba</th><th>Cena aranzmana</th></tr>
+		<c:forEach items="${aranzmani }" var="a">
+		<tr>
+			<td>${a.destinacija.naziv }</td>
+			<td>${a.hotel.naziv }</td>
+			<td>${a.soba.tip }</td>
+			<td>${a.cena}</td>
+		</tr>
+		</c:forEach>
+	</table>
+	<a href="/Agencija/Aranzman/aranzmanIzvestaj?username=${korisnik.username }"><button>Generisi detaljni izvestaj<</button></a>
+</body>
+</html>

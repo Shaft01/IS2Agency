@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="aranzmaniKorisnika" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8987b22f-4874-4b73-9a09-0d27c5877fa6">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="ime" class="java.lang.String"/>
+	<parameter name="username" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="datumRezervacije" class="java.util.Date"/>
+	<field name="datumPlacanja" class="java.util.Date"/>
+	<field name="brojDana" class="java.lang.Integer"/>
+	<field name="soba.idSoba" class="java.lang.Integer"/>
+	<field name="destinacija.naziv" class="java.lang.String"/>
+	<field name="hotel.naziv" class="java.lang.String"/>
+	<field name="cena" class="java.lang.Double"/>
+	<variable name="UkupnaCena" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{cena}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="30" width="100" height="30" uuid="f8306d3f-7103-458e-a6df-9871518e3546"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{ime}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="30" uuid="e6d5537b-30da-4b78-abc0-02afe7e881d5"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Korisnik:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="60" width="110" height="30" uuid="92784b9c-8eea-417a-aa9b-14248aee5001"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{username}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="30" uuid="77e886d0-0716-4e1a-8807-07880d51c93e"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Username:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="90" width="150" height="30" uuid="8dff60d8-e5e5-43b5-bd9b-d3f486e2ecda"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="90" width="100" height="30" uuid="aa77a3b7-fad6-4164-967f-fcef0551c53e"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="0" width="100" height="30" uuid="f80eefe9-e0b8-4b90-a2cb-9452f7c9d865"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Svi aranzmani korisnika]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="30" width="80" height="30" backcolor="#14E05F" uuid="dd036703-7456-43ec-9d56-f8a793a96c4f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f04c58e9-8c96-464a-a3f6-80e0b36efaae"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[datumPlacanja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="180" y="30" width="90" height="30" backcolor="#14E05F" uuid="b85193a5-01c1-40c5-b6d9-58e86b8da079">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c11e3be7-c637-45c5-b0ed-6da3de0a7f78"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[datumRezervacije]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="350" y="30" width="60" height="30" backcolor="#14E05F" uuid="c93ca4ab-917c-45b2-a9f1-229a3ccbb381">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2c12d7d9-7ff7-4b51-9b66-fc85b94188ab"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[brojDana]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="30" width="80" height="30" backcolor="#14E05F" uuid="8e8949be-5494-4c2f-bad4-b744a8cbaffc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="02e3d909-e660-4ab6-b21f-fb296e762d5d"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Destinacija]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="80" y="30" width="100" height="30" backcolor="#14E05F" uuid="56005df8-422c-4b69-97ac-89ae70220f50">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eb190f61-b5d7-4acf-bfc6-19c72c640cb7"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Hotel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="410" y="30" width="70" height="30" backcolor="#14E05F" uuid="60708ff2-232c-4e66-a355-b9bf558a5c19">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b1a087e4-1f29-45fe-b5ee-296496c8a508"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[broj sobe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="480" y="30" width="70" height="30" backcolor="#14E05F" uuid="5afb8f51-4ad8-403c-8fcf-a710cbf6889a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="874fddac-ca33-4d31-a116-e7ce2e7e9635"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cena]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="270" y="0" width="80" height="30" backcolor="#FFFFFF" uuid="f90ec7bf-cf0b-4690-9625-9b7d7c886571">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f04c58e9-8c96-464a-a3f6-80e0b36efaae"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{datumPlacanja} == null ? "nije poznat" : $F{datumPlacanja}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="90" height="30" backcolor="#FFFFFF" uuid="fd54137f-e409-462b-bbec-8e720748e66d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c11e3be7-c637-45c5-b0ed-6da3de0a7f78"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{datumRezervacije} == null ? "nije poznat" : $F{datumRezervacije}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="60" height="30" backcolor="#FFFFFF" uuid="8594f6c4-615d-42eb-a64f-f49a8eee2dd5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2c12d7d9-7ff7-4b51-9b66-fc85b94188ab"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{brojDana}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="80" height="30" backcolor="#FFFFFF" uuid="9212a03e-4d9a-447d-82b6-3da1bdaf4a94">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="02e3d909-e660-4ab6-b21f-fb296e762d5d"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{destinacija.naziv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="100" height="30" backcolor="#FFFFFF" uuid="f7f882b2-24df-4835-b598-b363b5d458c4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eb190f61-b5d7-4acf-bfc6-19c72c640cb7"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{hotel.naziv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="0" width="70" height="30" backcolor="#FFFFFF" uuid="1ea5b993-84c7-44ae-91e8-334d94a1f3b6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b1a087e4-1f29-45fe-b5ee-296496c8a508"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{soba.idSoba}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="70" height="30" backcolor="#FFFFFF" uuid="cfaa9593-ec7f-4206-9b4d-919f23778a86">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="874fddac-ca33-4d31-a116-e7ce2e7e9635"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cena}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="450" y="20" width="100" height="30" uuid="8a2593ab-3027-4735-a972-507b28681a9c"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="460" y="0" width="100" height="30" uuid="3bec294f-5f76-4b37-9844-c6f2c4aaf7fa"/>
+				<textFieldExpression><![CDATA[$V{UkupnaCena}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="0" width="100" height="30" uuid="7cc09053-e887-4c80-81af-ea841c750964"/>
+				<text><![CDATA[Ukupna cena:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

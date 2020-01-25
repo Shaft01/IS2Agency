@@ -1,0 +1,9 @@
+spring.mvc.view.prefix=/
+spring.mvc.view.suffix=.jsp
+spring.datasource.url=jdbc:mysql://nastava.is.pmf.uns.ac.rs:3306/is2
+spring.datasource.username=is2
+spring.datasource.password=is2
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+server.servlet.context-path=/Avio
+server.port=8081
+spring.jpa.hibernate.naming.physicalstrategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

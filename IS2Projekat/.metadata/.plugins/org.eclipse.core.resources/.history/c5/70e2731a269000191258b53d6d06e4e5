@@ -1,0 +1,40 @@
+package agencija.controller;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import model.Korisnik;
+import model.Uloga;
+
+@Controller
+@RequestMapping(value="/auth")
+public class LoginController {
+
+	@RequestMapping(value="loginPage", method=RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
+	@RequestMapping(value="pocetna",method=RequestMethod.GET)
+	public String pocetna() {
+		return "index";
+	}
+	@RequestMapping(value="registerKorisnik", method=RequestMethod.GET)
+	public String register(Model m) {
+		Korisnik k=new Korisnik();
+		m.addAttribute("korisnik",k);
+		return "register";
+	}
+	@RequestMapping(value="register",method=RequestMethod.POST)
+	public String saveKorisnik(@ModelAttribute("korisnik") Korisnik k) {
+		BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
+		k.setPassword(passwordEncoder.encode(k.getPassword()));
+		for(Uloga u: k.getUlogas()) {
+			u.addKorisnik(k);
+		}kr.save(u);
+		return "login";
+	}
+}

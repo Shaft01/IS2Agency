@@ -1,0 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Unos Aranzmana</title>
+</head>
+<body>
+	Popunite podatke za aranzman:
+	<form action="Agencija/Agencija/saveAranzman" method="post">
+		<table>
+			<tr>
+			<td>Unesite datum rezervacije:</td>
+			<td><input type="date" name="datumRezervacije"></td>
+			</tr>
+			<tr>
+				<td>Unesite datum placanja:</td>
+				<td><input type="date" name="datumPlacanja"></td>
+			</tr>
+			<tr>
+				<td>Odaberite koliko dana zelite da ostanete:</td>
+				<td><input type="number" name="brDana" min="1" max="10"></td>
+			</tr>
+			<tr>
+			<td> Odaberite sobu</td>
+			<td><select name="idSobe">
+				<c:forEach items="${sobe }" var="s">
+					<option value="${s.idSobe }">${s.tip } cena: ${s.cena }</option> 
+				</c:forEach>
+			</select></td>
+		</table>
+		<input type="submit" value="Rezervisi">
+	</form>
+</body>
+</html>

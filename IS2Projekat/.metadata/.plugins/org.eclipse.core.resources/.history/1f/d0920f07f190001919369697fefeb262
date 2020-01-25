@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Unos Hotela</title>
+</head>
+<body>
+	<form action="/Agencija/Unos/unosHotela" method="post">
+	<table>
+		<tr>
+			<td>Ime hotela:</td>
+			<td><input type="text" name="naziv"></td>
+		</tr>
+		<tr>
+			<td>Broj zvezdica:</td>
+			<td><input type="number" name="brZvezdica" min="1" max="5"></td>
+		</tr>
+		<tr>
+		<td>Destinacija</td>
+		<td><select name="destinacija" >
+					<c:forEach items="${destinacije}" var ="d">
+						<option value = "${d.idDestinacija}">${d.naziv}</option>
+					</c:forEach>
+				</select><br /></td>
+
+		</table>
+	 </form>
+</body>
+</html>

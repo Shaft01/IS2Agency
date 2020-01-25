@@ -1,0 +1,9 @@
+package agencija.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+@RequestMapping(value=".auth")
+public class LoginController {
+
+}

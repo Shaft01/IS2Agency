@@ -1,0 +1,5 @@
+package agencija.security;
+
+public class UserDetailsImpl {
+
+}

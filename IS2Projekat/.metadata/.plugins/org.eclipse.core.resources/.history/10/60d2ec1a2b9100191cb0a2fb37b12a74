@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Unos Aranzmana</title>
+</head>
+<body>
+	Popunite podatke za aranzman:
+	<form action="Agencija/Agencija/saveAranzman" method="post">
+		<table>
+			<tr>
+			<td>Unesite datum rezervacije:</td>
+			<td><input type="date" name="datumRezervacije">
+		</table>
+	
+	</form>
+</body>
+</html>

@@ -1,0 +1,78 @@
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the DarkoArnautGrad database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="DarkoArnautGrad.findAll", query="SELECT d FROM DarkoArnautGrad d")
+public class DarkoArnautGrad implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idGrada;
+
+	private String imeGrada;
+
+	private String skracenoIme;
+
+	//bi-directional many-to-one association to DarkoArnautAerodrom
+	@OneToMany(mappedBy="darkoArnautGrad")
+	private List<DarkoArnautAerodrom> darkoArnautAerodroms;
+
+	public DarkoArnautGrad() {
+	}
+
+	public int getIdGrada() {
+		return this.idGrada;
+	}
+
+	public void setIdGrada(int idGrada) {
+		this.idGrada = idGrada;
+	}
+
+	public String getImeGrada() {
+		return this.imeGrada;
+	}
+
+	public void setImeGrada(String imeGrada) {
+		this.imeGrada = imeGrada;
+	}
+
+	public String getSkracenoIme() {
+		return this.skracenoIme;
+	}
+
+	public void setSkracenoIme(String skracenoIme) {
+		this.skracenoIme = skracenoIme;
+	}
+
+	public List<DarkoArnautAerodrom> getDarkoArnautAerodroms() {
+		return this.darkoArnautAerodroms;
+	}
+
+	public void setDarkoArnautAerodroms(List<DarkoArnautAerodrom> darkoArnautAerodroms) {
+		this.darkoArnautAerodroms = darkoArnautAerodroms;
+	}
+
+	public DarkoArnautAerodrom addDarkoArnautAerodrom(DarkoArnautAerodrom darkoArnautAerodrom) {
+		getDarkoArnautAerodroms().add(darkoArnautAerodrom);
+		darkoArnautAerodrom.setDarkoArnautGrad(this);
+
+		return darkoArnautAerodrom;
+	}
+
+	public DarkoArnautAerodrom removeDarkoArnautAerodrom(DarkoArnautAerodrom darkoArnautAerodrom) {
+		getDarkoArnautAerodroms().remove(darkoArnautAerodrom);
+		darkoArnautAerodrom.setDarkoArnautGrad(null);
+
+		return darkoArnautAerodrom;
+	}
+
+}

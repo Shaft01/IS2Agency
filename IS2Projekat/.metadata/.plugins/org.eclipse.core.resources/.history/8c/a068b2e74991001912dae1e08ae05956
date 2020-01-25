@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+        <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Prikaz hotela</title>
+</head>
+<body>
+	<form action="/Agencija/Hotel/getDestinacije" method="get">
+		Unesite naziv destinacije:<input type="text" name="naziv">
+		<input type="submit" value="prikazi">
+	</form>
+	
+</body>
+</html>

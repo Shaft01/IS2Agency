@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Pocetna</title>
+<style>
+	
+</style>
+</head>
+<body>
+	<sec:authorize access="hasRole('ADMIN')">
+     <a href="/Agencija/unosDestinacije.jsp">Unos destinacije</a>
+     <a href="/Agencija/Unos/getDestinacije">Unos hotela</a>
+     <a href="/Agencija/prikazHotela.jsp">Svi aranzmani hotela</a>
+     <a href="/Agencija/Unos/getDestinacije">Unos sobe</a>
+	</sec:authorize>
+
+
+   <a href="/Agencija/Agencija/getDestinacije">Rezervisi aranzman</a>
+   <a href="/Agencija/Aranzman/getAranzmaniKorisnika">Pregledaj aranzmane</a>
+   <a href="/Agencija/auth/logout">Odjava</a>
+
+
+	
+</body>
+</html>

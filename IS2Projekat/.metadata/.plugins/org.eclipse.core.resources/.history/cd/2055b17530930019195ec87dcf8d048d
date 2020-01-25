@@ -1,0 +1,68 @@
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the darkoarnaut database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Darkoarnaut.findAll", query="SELECT d FROM Darkoarnaut d")
+public class Darkoarnaut implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idUloge;
+
+	private String uloga;
+
+	//bi-directional many-to-one association to Darkoarnautkorisnik
+	@OneToMany(mappedBy="darkoarnaut")
+	private List<Darkoarnautkorisnik> darkoarnautkorisniks;
+
+	public Darkoarnaut() {
+	}
+
+	public int getIdUloge() {
+		return this.idUloge;
+	}
+
+	public void setIdUloge(int idUloge) {
+		this.idUloge = idUloge;
+	}
+
+	public String getUloga() {
+		return this.uloga;
+	}
+
+	public void setUloga(String uloga) {
+		this.uloga = uloga;
+	}
+
+	public List<Darkoarnautkorisnik> getDarkoarnautkorisniks() {
+		return this.darkoarnautkorisniks;
+	}
+
+	public void setDarkoarnautkorisniks(List<Darkoarnautkorisnik> darkoarnautkorisniks) {
+		this.darkoarnautkorisniks = darkoarnautkorisniks;
+	}
+
+	public Darkoarnautkorisnik addDarkoarnautkorisnik(Darkoarnautkorisnik darkoarnautkorisnik) {
+		getDarkoarnautkorisniks().add(darkoarnautkorisnik);
+		darkoarnautkorisnik.setDarkoarnaut(this);
+
+		return darkoarnautkorisnik;
+	}
+
+	public Darkoarnautkorisnik removeDarkoarnautkorisnik(Darkoarnautkorisnik darkoarnautkorisnik) {
+		getDarkoarnautkorisniks().remove(darkoarnautkorisnik);
+		darkoarnautkorisnik.setDarkoarnaut(null);
+
+		return darkoarnautkorisnik;
+	}
+
+}

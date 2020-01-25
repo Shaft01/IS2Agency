@@ -1,0 +1,78 @@
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the darkoarnautgrad database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Darkoarnautgrad.findAll", query="SELECT d FROM Darkoarnautgrad d")
+public class Darkoarnautgrad implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idGrada;
+
+	private String imeGrada;
+
+	private String skracenoIme;
+
+	//bi-directional many-to-one association to Darkoarnautaerodrom
+	@OneToMany(mappedBy="darkoarnautgrad")
+	private List<Darkoarnautaerodrom> darkoarnautaerodroms;
+
+	public Darkoarnautgrad() {
+	}
+
+	public int getIdGrada() {
+		return this.idGrada;
+	}
+
+	public void setIdGrada(int idGrada) {
+		this.idGrada = idGrada;
+	}
+
+	public String getImeGrada() {
+		return this.imeGrada;
+	}
+
+	public void setImeGrada(String imeGrada) {
+		this.imeGrada = imeGrada;
+	}
+
+	public String getSkracenoIme() {
+		return this.skracenoIme;
+	}
+
+	public void setSkracenoIme(String skracenoIme) {
+		this.skracenoIme = skracenoIme;
+	}
+
+	public List<Darkoarnautaerodrom> getDarkoarnautaerodroms() {
+		return this.darkoarnautaerodroms;
+	}
+
+	public void setDarkoarnautaerodroms(List<Darkoarnautaerodrom> darkoarnautaerodroms) {
+		this.darkoarnautaerodroms = darkoarnautaerodroms;
+	}
+
+	public Darkoarnautaerodrom addDarkoarnautaerodrom(Darkoarnautaerodrom darkoarnautaerodrom) {
+		getDarkoarnautaerodroms().add(darkoarnautaerodrom);
+		darkoarnautaerodrom.setDarkoarnautgrad(this);
+
+		return darkoarnautaerodrom;
+	}
+
+	public Darkoarnautaerodrom removeDarkoarnautaerodrom(Darkoarnautaerodrom darkoarnautaerodrom) {
+		getDarkoarnautaerodroms().remove(darkoarnautaerodrom);
+		darkoarnautaerodrom.setDarkoarnautgrad(null);
+
+		return darkoarnautaerodrom;
+	}
+
+}

@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Pocetna</title>
+</head>
+<body>
+<sec:authorize access="hasRole('ADMIN')">
+     <a href="/Web/unos/DodajProizvodjaca.jsp">Unos proizvodjaca</a>
+     <a href="/Web/proizvod/getProizvodjaci">Unos proizvoda</a>
+     <a href="/Web/proizvod/getNaruceno">Posalji proizvod</a>
+     <a href="/Web/reports/izvestaj2">Kupljeno - izvestaj</a>
+</sec:authorize>
+
+ <sec:authorize access="hasRole('KORISNIK')or hasRole('ADMIN')">
+   <a href="/Web/user/getKupi">Kupi</a>
+   <a href="/Web/provera.jsp">Proveri stanje narudzbine</a>
+   <a href="/Web/auth/logout">Odjava</a>
+</sec:authorize>
+
+	<a href="/Agencija/Agencija/getDestinacije">Destinacije</a>
+</body>
+</html>

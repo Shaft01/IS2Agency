@@ -1,0 +1,66 @@
+package com.example.demo.controllor;
+
+import java.security.Principal;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.demo.repository.KartaRepository;
+import com.example.demo.repository.KorisnikRepository;
+import com.example.demo.repository.LetRepository;
+import com.example.demo.security.UserDetailsImpl;
+
+import model.DarkoArnautKarta;
+import model.DarkoArnautKorisnik;
+import model.DarkoArnautLet;
+import model.Darkoarnautkarta;
+import model.Darkoarnautkorisnik;
+import model.Darkoarnautlet;
+
+@Controller
+@RequestMapping(value="/rezervisi")
+public class KartaControllor {
+	
+	@Autowired
+	KartaRepository kr;
+	
+	@Autowired
+	KorisnikRepository kor;
+	
+	@Autowired
+	LetRepository lr;
+	
+	@RequestMapping(value="/rezervacija", method=RequestMethod.GET)
+	public String otvoriRezervaciju(int idL, HttpServletRequest request) {
+		Darkoarnautlet let=lr.findById(idL).get();
+		List<Darkoarnautkorisnik> lista=kor.findAll();
+		request.getSession().setAttribute("letR", let);
+		request.getSession().setAttribute("korisnici", lista);
+		return "/kupiKartu";
+	}
+	@RequestMapping(value="/sacuvaj", method=RequestMethod.POST)
+	public String sacuvaj(String mesto, char vrstaK, HttpServletRequest request) {
+		int cena=0;
+		if(vrstaK=='b')
+			cena=1000;
+		else if(vrstaK=='e')
+			cena=500;
+		int m=Integer.parseInt(mesto);
+		 Principal user = request.getUserPrincipal();
+		Darkoarnautkorisnik k=kor.findByUsername(user.getName());
+		Darkoarnautlet let=(Darkoarnautlet) request.getSession().getAttribute("letR");
+		Darkoarnautkarta novi=new Darkoarnautkarta();
+		novi.setCena(cena);
+		novi.setMesto(m);
+		novi.setDarkoarnautkorisnik(k);
+		novi.setDarkoarnautlet(let);
+		kr.save(novi);
+		return "index";
+	}
+}
